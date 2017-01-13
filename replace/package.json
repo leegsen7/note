@@ -1,0 +1,15 @@
+{
+  "name": "replace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spider.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node spider"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cheerio": "^0.22.0"
+  }
+}
