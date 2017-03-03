@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Document</title>
+</head>
+<body>
+<ul> 
+    <li><a href="#/" class="button">turn black</a></li> 
+    <li><a href="#/orange" class="button">turn orange</a></li> 
+    <li><a href="#/purple" class="button">turn purple</a></li> 
+</ul>
+<script>
+function Router() {
+    this.routes = {};
+    this.currentUrl = '';
+}
+Router.prototype.route = function(path, callback) {
+    this.routes[path] = callback || function(){};
+};
+Router.prototype.refresh = function() {
+    this.currentUrl = location.hash.slice(1) || '/';
+    this.routes[this.currentUrl]();
+};
+Router.prototype.init = function() {
+    window.addEventListener('load', this.refresh.bind(this), false);
+    window.addEventListener('hashchange', this.refresh.bind(this), false);
+}
+myRouter = new Router();
+myRouter.init();
+// change Page anything
+function changeBgColor(color) {
+    document.body.style.backgroundColor = color;
+}
+myRouter.route('/', function() {
+    changeBgColor('black');
+});
+myRouter.route('/orange', function() {
+    changeBgColor('orange');
+});
+myRouter.route('/purple', function() {
+    changeBgColor('purple');
+});
+</script>
+</body>
+</html>

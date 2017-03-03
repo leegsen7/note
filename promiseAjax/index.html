@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button>点击测试</button>
+
+<script src="index.js"></script>
+<script>
+	let btn = document.getElementsByTagName('button')[0];
+	btn.addEventListener('click',() => {
+		ajax('http://localhost:8080/api/infinity').then(data => {
+			alert('success');
+		}).catch(err => {
+			console.log(err);
+		})
+	})
+</script>
+</body>
+</html>

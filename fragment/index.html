@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            var Btn1 = document.getElementById('btn1');
+            var Btn2 = document.getElementById('btn2');
+            var oUl = document.getElementById('ul1');
+            Btn1.onclick = function() {
+                var iStart = new Date().getTime();
+                var i = 0;
+                for (i = 0; i < 100000; i++) {
+                    var oLi = document.createElement('li');
+                    oLi.innerText = i;
+                    oUl.appendChild(oLi);
+                }
+                alert(new Date().getTime() - iStart); //302 313 345
+            }
+			Btn2.onclick = function(){
+				var iStart = new Date().getTime();
+				var oFrag = document.createDocumentFragment(); //文档碎片
+                var i = 0;
+                for (i = 0; i < 100000; i++) {
+                    var oLi = document.createElement('li');
+                    oLi.innerText = i;
+                    oFrag.appendChild(oLi);
+                }
+                oUl.appendChild(oFrag);
+				alert(new Date().getTime() - iStart);
+			}
+        }
+    </script>
+</head>
+ 
+<body>
+    <button id="btn1">普通插入</button> <button id="btn2">碎片插入</button>
+    <ul id="ul1">
+ 
+    </ul>
+
+</body>
+ 
+</html>
