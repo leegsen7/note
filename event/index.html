@@ -51,7 +51,7 @@ var div1 = document.getElementById('div1');　　　　
 var div2 = document.getElementById('div2');　　
 var div3 = document.getElementById('div3');　
 div1.addEventListener('click', function() {　　
-    alert('div1捕获')　　
+    alert('div1捕获');
 }, true);　　
 div1.addEventListener('click', function() {　　
     alert('div1冒泡')　　
@@ -65,8 +65,10 @@ div2.addEventListener('click', function() {　　
 div3.addEventListener('click', function() {　　
     alert('div3捕获')　　
 }, true);　　
-div3.addEventListener('click', function() {　　
-    alert('div3冒泡')　　
+div3.addEventListener('click', function(event) {　　
+    alert('div3冒泡');
+    // 阻止冒泡事件
+    // event.stopPropagation();
 }, false);
 
 // div1捕获 => div2捕获 => div3捕获 => div3冒泡 => div2冒泡 => div1冒泡
