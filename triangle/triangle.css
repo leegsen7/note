@@ -1,0 +1,88 @@
+body{
+	padding:0;
+	margin:0;
+}
+.syntaxhighlighter{
+	overflow: hidden !important;
+}
+.syntaxhighlighter .toolbar{
+	display: none !important;
+}
+.main{
+	width:800px;
+	margin:0 auto 200px;
+}
+.centered{
+	text-align: center;
+}
+.inline-block{
+	display: inline-block;
+}
+.margin-bottom-15{
+	margin-bottom: 15px;
+}
+.triangle-1{
+	border:20px solid black;
+}
+.triangle-2{
+	height: 10px;
+	width: 10px;
+	border-top:20px solid black;
+	border-bottom:20px solid black;
+	border-left:20px solid pink;
+	border-right: 20px solid pink;
+}
+.triangle-3{
+	border-top:20px solid black;
+	border-bottom:20px solid black;
+	border-left:20px solid pink;
+	border-right: 20px solid pink;
+}
+.triangle-4{
+	border-top:20px solid black;
+	border-bottom: 20px solid transparent;
+	border-left:20px solid transparent;
+	border-right: 20px solid transparent;
+}
+.triangle-5{
+	border-top:20px solid black;
+	border-left:20px solid transparent;
+	border-right: 20px solid transparent;
+}
+.triangle-6{
+	border-top:20px solid black;
+	border-left:20px solid transparent;
+}
+.triangle-7{
+	border-bottom:20px solid red;
+	border-right:20px solid transparent;
+}
+.triangle-8{
+	border-top:20px solid transparent;
+	border-left:20px solid red;
+}
+.triangle-9{
+	border-top:20px solid red;
+	border-left:40px solid transparent;
+}
+.triangle-10{
+	border-top:20px solid red;
+	border-left:40px solid transparent;
+	border-right:40px solid transparent;
+}
+.triangle-11{
+	border-top:20px solid red;
+	border-left:30px solid pink;
+	border-right:40px solid black;
+}
+.triangle-12{
+	width:0;
+	height: 0;
+	border-bottom: 40px solid red;
+	border-left: 30px solid transparent;
+	border-right: 50px solid transparent;
+}
+.box{
+	padding-left:80px;
+	padding-bottom: 40px;
+}
