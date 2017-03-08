@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+#div1 {
+    width: 400px;
+    height: 200px;
+    border: 1px solid black;
+    padding-left: 100px;
+}
+#div2 {
+    width: 200px;
+    height: 150px;
+    border: 1px solid red;
+    padding-left: 50px;
+}
+#div3{
+	width:150px;
+	height: 100px;
+	border:1px solid yellow;
+}
+li{
+	background: red;
+	margin:5px 0;
+}
+</style>
+</head>
+<body>
+	<!-- 事件流 -->
+    <div id="div1">
+	    我是div1
+	    <div id="div2">
+	    	我是div2
+			<div id="div3">
+				我是div3
+			</div>
+	    </div>
+    </div>
+    <!-- 事件委托 -->
+	<ul id="ul">
+		<li data="1">aaaaaaaa</li>
+		<li data="2">bbbbbbbb</li>
+		<li data="3">cccccccc</li>
+	</ul>    
+<script>
+// 事件流
+var div1 = document.getElementById('div1');　　　　
+var div2 = document.getElementById('div2');　　
+var div3 = document.getElementById('div3');　
+div1.addEventListener('click', function() {　　
+    alert('div1捕获')　　
+}, true);　　
+div1.addEventListener('click', function() {　　
+    alert('div1冒泡')　　
+}, false);　
+div2.addEventListener('click', function() {　　
+    alert('div2捕获')　　
+}, true);　　
+div2.addEventListener('click', function() {　　
+    alert('div2冒泡')　　
+}, false);　　
+div3.addEventListener('click', function() {　　
+    alert('div3捕获')　　
+}, true);　　
+div3.addEventListener('click', function() {　　
+    alert('div3冒泡')　　
+}, false);
+
+// div1捕获 => div2捕获 => div3捕获 => div3冒泡 => div2冒泡 => div1冒泡
+
+
+// 原始方法
+// window.onload = function(){
+// 	var oUl = document.getElementById("ul");
+// 	var aLi = oUl.getElementsByTagName("li");
+
+// 	for(var i=0; i<aLi.length; i++){
+// 		aLi[i].onmouseover = function(){
+// 			this.style.background = "red";
+// 		}
+// 		aLi[i].onmouseout = function(){
+// 			this.style.background = "";
+// 		}
+// 	}
+// }
+// 委托方法
+window.onload = function(){
+	var oUl = document.getElementById("ul");
+	oUl.addEventListener('click',function(event){
+		var event = event || window.event;
+		var target = event.target || event.srcElement;
+		if (target.nodeName.toLowerCase() == 'li'){
+			var value = target.getAttribute('data');
+			alert(value);
+		}		
+	});
+}
+</script>
+</body>
+</html>
