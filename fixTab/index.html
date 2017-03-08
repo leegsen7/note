@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fixTab Demo</title>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+	<style>
+	html,body{
+		margin:0;
+		padding:0;
+	}
+	header{
+		height: 60px;
+		font-size: 22px;
+		line-height: 60px;
+		background: red;
+		color:#fff;
+		text-align: center;
+	}
+	.content{
+		height: 3000px;
+		background: yellow;
+	}
+	.content-fix-tab{
+		width:100%;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		background: #000;
+		color:#fff;
+		font-size: 32px;
+		top:0;
+	}
+	.content-main li{
+		height: 40px;
+	}
+	.sticky{
+		position: -webkit-sticky;
+		position: -moz-sticky;
+		position: -o-sticky;
+		position: -ms-sticky;
+		position: sticky;
+	}
+	.fixed{
+		position: fixed;
+		left:0;
+	}
+	</style>
+</head>
+<body>
+	<header>这是header</header>
+	<div class="content">
+		<div class="content-fix-tab">
+			fixTab
+		</div>
+		<div class="content-main">
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+			<li>这是li标签</li>
+		</div>
+	</div>
+<script>
+var element = document.getElementsByClassName('content-fix-tab')[0];
+var elementHeight = element.offsetHeight;
+var header = document.getElementsByTagName('header')[0];
+var headerHeight = header.offsetHeight;
+var timout = null;
+
+// 判断类是否存在
+Element.prototype.hasClass = function(aClass){
+    return this.className.match(new RegExp('(\\s|^)' + aClass + '(\\s|$)'));
+}
+// 增加一个类
+Element.prototype.addClass = function(newClass){
+    if (!this.hasClass(newClass)){
+        this.className += " " + newClass;
+        return this;            
+    }
+}
+// 移除一个类
+Element.prototype.removeClass = function(oldClass){
+    var reg = new RegExp('(\\s|^)' + oldClass + '(\\s|$)');
+    if (this.hasClass(oldClass)){
+        this.className = this.className.replace(reg,'');
+        return this;            
+    }
+}
+var isSupportSticky = (function (){
+    for (var t = ["", "-webkit-", "-ms-", "-moz-", "-o-"], e = "", i = 0; i < t.length; i++)
+        e += "position:" + t[i] + "sticky;";
+    var n = document.createElement("div"),
+      	o = document.body;
+    n.style.cssText = "display:none;" + e,
+    o.appendChild(n);
+    var a = /sticky/i.test(window.getComputedStyle(n).position);
+    return o.removeChild(n),
+    	n = null,
+    	a;
+})();
+
+isSupportSticky ? SupportSticky() : noSupportSticky();
+
+function SupportSticky(){
+	console.log('支持sticky');
+	element.addClass('sticky');
+}
+function noSupportSticky(){
+	console.log('不支持sticky');
+    window.addEventListener("touchstart", dealFunc);
+    window.addEventListener("touchend", dealFunc);
+    window.addEventListener("touchmove", dealFunc);
+    window.addEventListener("load", dealFunc);
+}
+function dealFunc(){
+	document.body.scrollTop > headerHeight ? fixed() : back();
+	function fixed(){
+		element.addClass('fixed');
+		header.style.marginBottom = elementHeight+'px';
+	}
+	function back(){
+		element.removeClass("fixed");
+		header.style.marginBottom = '0';
+	}
+	timer();
+}
+function timer(){
+	timout && (clearTimeout(timout),timout = null),
+	timout = setTimeout(function(){
+		dealFunc();
+	},50);
+}
+</script>
+</body>
+</html>
