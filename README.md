@@ -13,16 +13,16 @@
 
 * promiseAjax 文件夹是利用promise封装的ajax请求和jsonp跨域请求，有两种用法
     ```javascript
-ajax({
-	url:url,
-	data:data,
-	method:get||post, // 默认为get，这里不能jsonp
-}).then(fn).catch(fn);
+    ajax({
+    	url:url,
+    	data:data,
+    	method:get||post, // 默认为get，这里不能jsonp
+    }).then(fn).catch(fn);
     ```
 	```javascript
-ajax.get({ // 这里的get还可以是post和jsonp
-	url:url,
-	data:data
-}).then(fn).catch(fn);
+    ajax.get({ // 这里的get还可以是post和jsonp
+    	url:url,
+    	data:data
+    }).then(fn).catch(fn);
     ```
     * Demo地址: [Demo](https://leegsen7.github.io/note/promiseAjax/index.html)
