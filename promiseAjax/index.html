@@ -5,18 +5,54 @@
 	<title>Document</title>
 </head>
 <body>
-	<button>点击测试</button>
-
+	<button id="btn1">我的一个api测试</button>
+	<button id="btn2">网易云api测试</button>
+	<div id="main" style="word-wrap:break-word;"></div>
 <script src="index.js"></script>
 <script>
-	let btn = document.getElementsByTagName('button')[0];
-	btn.addEventListener('click',() => {
-		ajax('http://localhost:8080/api/infinity').then(data => {
-			alert('success');
+	let btn1 = document.getElementById('btn1');
+	let btn2 = document.getElementById('btn2');
+	let main = document.getElementById('main');
+
+	btn1.addEventListener('click',() => {
+		ajax.jsonp({
+			url:'http://leegsen7.cn:8080/api/infinity',
+		}).then(data => {
+			main.innerText = typeof data == "object"?JSON.stringify(data):data;
 		}).catch(err => {
-			console.log(err);
+			console.error(err);
 		})
-	})
+	});
+	btn2.addEventListener('click',() => {
+		ajax.jsonp({
+			url:'http://s.music.163.com/search/get/',
+			data:{
+				s:'安静',
+				type:1,
+				limit:50
+			}
+		}).then(data => {
+			main.innerText = typeof data == "object"?JSON.stringify(data):data;
+		}).catch(err => {
+			console.error(err);
+		})
+	});
+	// window.onload = () => {
+	// 	ajax.jsonp({
+	// 		url:'http://leegsen7.cn:8080/api/infinity',
+	// 	}).then(data => {
+	// 		console.log(data.musicList[3].name);
+	// 	}).catch(err => {
+	// 		console.error(err);
+	// 	});
+	// 	ajax.jsonp({
+	// 		url:'http://localhost:88/test',
+	// 	}).then(data => {
+	// 		console.log(data);
+	// 	}).catch(err => {
+	// 		console.error(err);
+	// 	});
+	// }
 </script>
 </body>
 </html>
