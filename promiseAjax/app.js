@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./"));
 
 app.get('/test',(req,res) => {
-	let callback = req.query.callback;
+	let callback = req.query.callback || req.query.cb;
 	let a = req.query.a;
 	console.log(a);
 	let data = {

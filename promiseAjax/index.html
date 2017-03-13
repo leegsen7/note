@@ -7,17 +7,18 @@
 <body>
 	<button id="btn1">我的一个api测试</button>
 	<button id="btn2">网易云api测试</button>
+	<button id="btn3">百度提示api测试</button>
+	<span>如果控制台出现不能加载非HTTPS协议的脚本错误，请在地址栏右边点击加载不安全脚本</span>
 	<div id="main" style="word-wrap:break-word;"></div>
 <script src="index.js"></script>
 <script>
 	let btn1 = document.getElementById('btn1');
 	let btn2 = document.getElementById('btn2');
+	let btn3 = document.getElementById('btn3');
 	let main = document.getElementById('main');
 
 	btn1.addEventListener('click',() => {
-		ajax.jsonp({
-			url:'http://leegsen7.cn:8080/api/infinity',
-		}).then(data => {
+		ajax.jsonp('http://leegsen7.cn:8080/api/infinity').then(data => {
 			main.innerText = typeof data == "object"?JSON.stringify(data):data;
 		}).catch(err => {
 			console.error(err);
@@ -37,6 +38,19 @@
 			console.error(err);
 		})
 	});
+	btn3.addEventListener('click',() => {
+		ajax.jsonp({
+			url:'http://suggestion.baidu.com/su',
+			data:{
+				wd:'github'
+			},
+			callback:'cb'
+		}).then(data => {
+			main.innerText = typeof data == "object"?JSON.stringify(data):data;
+		}).catch(err => {
+			console.error(err);
+		})
+	})
 	// window.onload = () => {
 	// 	ajax.jsonp({
 	// 		url:'http://leegsen7.cn:8080/api/infinity',

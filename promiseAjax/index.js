@@ -8,7 +8,13 @@
 			constructor: ajax,
 			init: function(ajaxData){
 				let self = this;
-				let [url,data,method] = [ajaxData.url,ajaxData.data,ajaxData.method];
+				let url = '',method = 'get',data = null;
+				if (typeof ajaxData == "string"){
+					url = ajaxData;
+				}
+				else {
+					[url,data,method] = [ajaxData.url,ajaxData.data,ajaxData.method || 'get'];
+				}
 				let xml = new XMLHttpRequest();
 
 				return new Promise((resolve,reject) => {
@@ -50,11 +56,18 @@
 			},
 			jsonp: function(ajaxData){
 				return new Promise((resolve,reject) => {
-					let [url,data] = [ajaxData.url,ajaxData.data];
+					let url = '',data = null;
+
+					if (typeof ajaxData == "string"){
+						url = ajaxData;
+					}
+					else {
+						[url,data] = [ajaxData.url,ajaxData.data];
+					}
 					let element = document.createElement('script');
 					let callbackName = 'callbackFunc_' + new Date().getTime();
-
-					element.src = data?url+'?callback='+callbackName+'&'+this.dataToStr(data):url+'?callback='+callbackName;
+					let callback = ajaxData.callback || 'callback';
+					element.src = data?`${url}?${callback}=${callbackName}&${this.dataToStr(data)}`:`${url}?${callback}=${callbackName}`;
 					document.getElementsByTagName('head')[0].appendChild(element);
 
 					window[callbackName] = function(result){
