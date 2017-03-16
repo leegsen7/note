@@ -1,13 +1,10 @@
 ;(function(window){
 	var ajax = (function(){
-		var ajax = function(ajaxData){
-			return new ajax.fn.init(ajaxData);
-		};
+		var ajax = ajaxData => new ajax.fn.init(ajaxData);
 
 		ajax.fn = ajax.prototype = {
 			constructor: ajax,
 			init: function(ajaxData){
-				let self = this;
 				let url = '',method = 'get',data = null;
 				if (typeof ajaxData == "string"){
 					url = ajaxData;
@@ -19,7 +16,7 @@
 
 				return new Promise((resolve,reject) => {
 					if ((!method || method.toLowerCase() == 'get') && data){
-						url += '?'+self.dataToStr(data);
+						url += '?'+this.dataToStr(data);
 					}
 
 					xml.open(method || "get",url,true);
@@ -39,7 +36,7 @@
 
 					if (data && method && method.toLowerCase() == 'post'){
 						xml.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-						xml.send(self.dataToStr(data));
+						xml.send(this.dataToStr(data));
 					}
 					else {
 						xml.send();
@@ -93,16 +90,12 @@
 			}
 		}
 
-		ajax.get = function(data){
-			return ajax.fn.get(data);
-		}
-		ajax.post = function(data){
-			return ajax.fn.post(data);
-		}
-		ajax.jsonp = function (data){
-			return ajax.fn.jsonp(data);
-		}
+		ajax.get = data => ajax.fn.get(data);
+		ajax.post = data => ajax.fn.post(data);
+		ajax.jsonp = data => ajax.fn.jsonp(data);
+
 		ajax.fn.init.prototype = ajax.fn;
+
 		return ajax;
 	})();
 

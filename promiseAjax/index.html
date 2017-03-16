@@ -3,15 +3,60 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<script src="https://cdn.bootcss.com/vue/1.0.24/vue.min.js"></script>
 </head>
-<body>
-	<button id="btn1">我的一个api测试</button>
-	<button id="btn2">网易云api测试</button>
-	<button id="btn3">百度提示api测试</button>
+<body id="body">
+	<button @click="clickFunc('my')">我的一个api测试</button>
+	<button @click="clickFunc('wang')">网易云api测试</button>
+	<button @click="clickFunc('baidu')">百度提示api测试</button>
 	<span>如果控制台出现不能加载非HTTPS协议的脚本错误，请在地址栏右边点击加载不安全脚本</span>
-	<div id="main" style="word-wrap:break-word;"></div>
+	<div id="main" style="word-wrap:break-word;">
+		{{jsonData}}
+	</div>
 <script src="index.js"></script>
 <script>
+var vueDemo = new Vue({
+	el:'#body',
+	data:{
+		jsonData:''
+	},
+	methods:{
+		clickFunc:function (type){
+			if (type == 'my'){
+				this.jsonpFunc('http://leegsen7.cn:8080/api/infinity');
+
+			}
+			else if (type == 'wang'){
+				this.jsonpFunc({
+					url:'http://s.music.163.com/search/get/',
+					data:{
+						s:'安静',
+						type:1,
+						limit:50
+					}
+				});
+			}
+			else if (type == "baidu"){
+				this.jsonpFunc({
+					url:'http://suggestion.baidu.com/su',
+					data:{
+						wd:'github'
+					},
+					callback:'cb'
+				})
+			}
+		},
+		jsonpFunc:function (arg){
+			ajax.jsonp(arg).then(data => {
+				this.jsonData = typeof data == "object"?JSON.stringify(data):data;
+			}).catch(err => {
+				console.error(err);
+			})
+		}
+	}
+})
+</script>
+<!-- <script>
 	let btn1 = document.getElementById('btn1');
 	let btn2 = document.getElementById('btn2');
 	let btn3 = document.getElementById('btn3');
@@ -67,6 +112,6 @@
 	// 		console.error(err);
 	// 	});
 	// }
-</script>
+</script> -->
 </body>
 </html>
