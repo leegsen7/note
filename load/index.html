@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+<!-- 	<script>
+	var time0 = new Date().getTime();
+	function bodyOnLoad(){
+		var time1 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('bodyOnLoad='+time1);
+	}
+	document.onreadystatechange = function(){
+		var time6 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('onreadystatechange='+time6);
+
+		if (document.readyState == "complete"){
+			var time3 = (new Date().getTime() - time0)/1000 + 's';
+			console.log('document.readyState=complete='+time3);
+		}
+	}
+	$(document).ready(function(){
+		var time4 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('$(document).ready()='+time4);
+	});
+	$(window).load(function(){
+		var time5 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('$(window).load()='+time5);
+	});
+	window.addEventListener('load',function(){
+		var time2 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('windowOnLoad='+time2);
+	})
+	</script> -->
+</head>
+<body onload="bodyOnLoad()">
+	<img src="http://115.159.33.194/images/app/baiduyun.png" alt="">
+	<img src="http://115.159.33.194/images/app/baidumap.png" alt="">
+	<img src="http://115.159.33.194/images/app/app.png" alt="">
+	<img src="http://115.159.33.194/images/app/wxpingtai.png" alt="">
+	<img src="http://115.159.33.194/images/app/ss.png" alt="">
+	<img src="http://115.159.33.194/images/app/gaodemap.png" alt="">
+	<img src="http://115.159.33.194./images/app/100.png" alt="">
+	<img src="http://115.159.33.194/images/blog/tieba.png" alt="">
+	<img src="http://115.159.33.194/images/blog/wechat.png" alt="">
+	<img src="http://115.159.33.194/images/edu/muke.png" alt="">
+	<div id="main">
+
+	</div>
+	<script>
+	(function(){
+		var dom = document.getElementById('main');
+		for (var i=0;i<100000;i++){
+			var li = document.createElement('li');
+			li.innerText = i;
+			dom.appendChild(li);
+		}
+	})();
+	var time0 = new Date().getTime();
+	function bodyOnLoad(){
+		var time1 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('bodyOnLoad='+time1);
+	}
+	document.onreadystatechange = function(){
+		var time6 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('onreadystatechange='+time6);
+
+		if (document.readyState == "complete"){
+			var time3 = (new Date().getTime() - time0)/1000 + 's';
+			console.log('document.readyState=complete='+time3);
+		}
+	}
+	$(document).ready(function(){
+		var time4 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('$(document).ready()='+time4);
+	});
+	$(window).load(function(){
+		var time5 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('$(window).load()='+time5);
+	});
+	window.addEventListener('load',function(){
+		var time2 = (new Date().getTime() - time0)/1000 + 's';
+		console.log('windowOnLoad='+time2);
+	})
+	</script>
+</body>
+</html>

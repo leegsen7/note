@@ -1,3 +1,2 @@
-/fixTab/node_modules
-/fixTab/gulpfile.js
-/promiseAjax/node_modules
+**/node_modules
+.gitignore
