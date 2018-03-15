@@ -5,31 +5,31 @@
     null == undefined // true
     // 其余比较都返回false
     ```
-    <img src="3.png" height="100" />
+    <img src="3.png" width="80%" style="text-align: center;" />
 
 2. 当Number类型(x)与String类型(y)比较时,返回`x === Number(y)`的结果
-    String类型转换成Number
+    <br>String类型转换成Number
     ```javascript
     Number('') // 0
     Number('1') // 1
     Number('11a') // NaN
     Number('aaa') // NaN
     ```
-    <img src="2.png" height="100" />
+    <img src="2.png" width="80%" style="text-align: center;" />
 
 3. 当Boolean类型(x)与其他类型(y)比较时,返回`Number(x) == y`的结果
-    Boolean类型转换成Number
+    <br>Boolean类型转换成Number
     ```javascript
     Number(true) // 1
     Number(false) // 0
     ```
-    <img src="1.png" height="100" />
+    <img src="1.png" width="80%" style="text-align: center;" />
 
 4. 当Object类型(x)与Number、String类型(y)比较时,返回`ToPrimitive(x) == y`的结果
-    ToPrimitive转换规则如下(如果是Date实例的话则步骤1和2顺序对调):
-        1. 调用valueOf方法,如果是原始数据类型则返回,否则下一步
-        2. 调用toString方法,如果是原始数据类型则返回,否则下一步
-        3. 抛出异常
+    <br>ToPrimitive转换规则如下(如果是Date实例的话则步骤1和2顺序对调):
+    1. 调用valueOf方法,如果是原始数据类型则返回,否则下一步
+    2. 调用toString方法,如果是原始数据类型则返回,否则下一步
+    3. 抛出异常
     ```javascript
     var obj = {}
     var arr = [1,2,3]
