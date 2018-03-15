@@ -1,4 +1,10 @@
 let str = "Hello, my name is ${user.name}. I\'m ${age} years old.";
+let data = {
+    user:{
+        name:"li",
+    },
+    age:21
+}
 
 function TemplateEngine(str,data){
 	let reg = /\${([^\}]+)?\}/g,
@@ -9,18 +15,21 @@ function TemplateEngine(str,data){
     }
 	while(match = reg.exec(str)) {
 	    add(str.slice(cursor, match.index));
-	    add(match[1], true); 
+	    add(match[1], true);
 	    cursor = match.index + match[0].length;
 	}
     add(str.substr(cursor, str.length - cursor));
     code += 'return r.join("");';
-    	
+
 	return new Function(code).apply(data);
 }
 
-console.log(TemplateEngine(str,{
-	user:{
-		name:"li",
-	},
-	age:21
-}));
+let res_0 = TemplateEngine(str,data)
+console.log(res_0)
+
+
+let StringTemplate = (str,data) => str.replace(/\${([^\}]+)?\}/g,val => new Function('return this.' + val.replace(/\${|\}/g,'')).call(data))
+
+let res_1 = StringTemplate(str,data)
+
+console.log(res_1)
