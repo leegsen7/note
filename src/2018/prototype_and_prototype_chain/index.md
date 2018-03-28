@@ -23,4 +23,26 @@ arr.__proto__.__proto__.__proto__ === null // true
 当我们对一个对象使用`.`操作符调用一个属性时,先会在此对象上寻找此属性,如果找到则返回,如果找不到就会沿着原型链上去找,如果在原型链上都找不到的话则返回undefined<br>
 下面测试一下,在arr对象上添加一个push方法<br>
 <img src="5.png" width="80%" /><br>
-可以看到
+可以看到执行`arr.push()`时调用的是自身属性上的方法,并不是原型上的方法.<br>
+根据原型链的调用规则,我们知道,所有的对象都是可以调用Object.prototype上的方法的,比如<br>
+```javascript
+arr.hasOwnProperty('length') // true
+// 读取一个自身没有且原型链上也没有的属性就会返回undefined
+arr.test // undefined
+```
+根据arr的原型链,我们知道<br>
+```javascript
+arr instanceof Array // true
+arr instanceof Object // true
+Array.prototype instanceof Object // true
+```
+但是,看到一下这些,可能你就要纳闷,为什么这也是
+```javascript
+Array instanceof Object // true
+String instanceof Object // true
+Number instanceof Object // true
+Function instanceof Object // true
+Object instanceof Object // true 这还是???
+```
+这一切是因为这个神奇的东西`Function`<br>
+The end!
