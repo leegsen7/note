@@ -1,11 +1,10 @@
-# 开发笔记
-
 ## 导航
 - [2018](#2018)
 - [2017](#2017)
 ---
 
 ## 2018
+- [原型和原型链](./src/2018/prototype_and_prototype_chain/index.md)
 - [使用'=='比较不同数据类型](./src/2018/equality_different_data_type/index.md)
 ---
 
