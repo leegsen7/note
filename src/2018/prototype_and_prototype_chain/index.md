@@ -17,7 +17,7 @@ arr.__proto__ === Array.prototype // true
 Array.prototype.__proto__ === Object.prototype // true
 arr.__proto__.__proto__ === Object.prototype // true
 arr.__proto__.__proto__.__proto__ === null // true
-`
+```
 一个对象沿着它的__proto__出发,到达一个又一个的__proto__,直到这个属性为null,这就是原型链.
 <img src="4.png" width="80%" /><br>
 当我们对一个对象使用`.`操作符调用一个属性时,先会在此对象上寻找此属性,如果找到则返回,如果找不到就会沿着原型链上去找,如果在原型链上都找不到的话则返回undefined<br>
