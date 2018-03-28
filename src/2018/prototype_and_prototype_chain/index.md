@@ -36,13 +36,39 @@ arr instanceof Array // true
 arr instanceof Object // true
 Array.prototype instanceof Object // true
 ```
-但是,看到一下这些,可能你就要纳闷,为什么这也是
+[instanceof运算符说明](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)
+> instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。【摘自MDN】
+
+但是,看到一下这些,可能你就要纳闷,为什么是这样的结果
 ```javascript
 Array instanceof Object // true
 String instanceof Object // true
 Number instanceof Object // true
 Function instanceof Object // true
-Object instanceof Object // true 这还是???
+Function instanceof Function // true 这竟然是？
+Object instanceof Function // true 这也是？？
+Object instanceof Object // true 这踏马还是？？？
 ```
 这一切是因为这个神奇的东西`Function`<br>
+我的理解是Function创造全局构造函数的机器，包括Object和它自身Function
+```javascript
+// 所以Function有一个神奇的等式
+Function.__proto__ === Function.prototype => Function instanceof Function // true
+Array.__proto__ === Function.prototype // true
+String.__proto__ === Function.prototype // true
+Number.__proto__ === Function.prototype // true
+Object.__proto__ === Function.prototype => Object instanceof Function // true
+```
+// 而除Object之外的其他全局构造函数的原型的__proto__都是指向万物的终点Object.prototype，即<br>
+```javascript
+Function.prototype.__proto__ === Object.prototype // true
+// 所以
+Function.__proto__.__proto__ === Object.prototype => Function instanceof Object // true
+Array.__proto__.__proto__ === Object.prototype // true
+String.__proto__.__proto__ === Object.prototype // true
+Number.__proto__.__proto__ === Object.prototype // true
+Object.__proto__.__proto__ === Object.prototype => Object instanceof Object // true
+```
+最后一张图总结<br>
+<img src="6.png" width="80%" /><br>
 The end!
