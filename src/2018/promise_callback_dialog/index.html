@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dialog</title>
+    <style type="text/css">
+        div {
+            box-sizing: border-box;
+        }
+        html,body,#app {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .main {
+            width: 300px;
+            margin: 15px auto 0;
+        }
+        .main > div {
+            margin-bottom: 15px;
+        }
+        textarea {
+            width: 285px;
+            height: 60px;
+        }
+        .diaglog-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 10;
+            background: rgba(0,0,0,.25);
+        }
+        .dialog-container {
+            width: 180px;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #fff;
+        }
+        .dialog-content {
+            padding: 10px;
+            border-bottom: 1px solid #cecece;
+        }
+        .btn-group {
+            padding: 10px;
+            text-align: center;
+        }
+        .btn-group.flex {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+    <a href="https://github.com/leegsen7/note" target="_blank">
+        <img style="position: absolute; top: 0; right: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on Github" />
+    </a>
+    <div id="app">
+        <m-dialog></m-dialog>
+        <div class="main">
+            <div>
+                提示语：<input type="text" v-model="options.content">
+            </div>
+            <div>
+                确认按钮文字：<input type="text" v-model="options.confirmText">
+            </div>
+            <div>
+                隐藏取消按钮: <input type="checkbox" v-model="options.hideCancel">
+            </div>
+            <div v-if="!options.hideCancel">
+                取消按钮文字：<input type="text" v-model="options.cancelText">
+            </div>
+            <div>
+                点击确定按钮之后的操作：<textarea v-model="confirmFnText"></textarea>
+            </div>
+            <div>
+                点击取消按钮之后的操作：<textarea v-model="cancelFnText"></textarea>
+            </div>
+            <button @click="clickBtn">点击触发dialog</button>
+        </div>
+    </div>
+    <script>
+        const mDialog = {
+            template: `
+                <div class="diaglog-mask" v-show="showDialog">
+                    <div class="dialog-container">
+                        <div class="dialog-content">{{options.content}}</div>
+                        <div class="btn-group" :class="{flex: !options.hideCancel}">
+                            <button v-if="!options.hideCancel" @click="cancelEvent">{{options.cancelText}}</button>
+                            <button @click="confirmEvent">{{options.confirmText}}</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            data() {
+                const defaultOptions = {
+                    hideCancel: false,
+                    cancelText: '取消',
+                    confirmText: '确定',
+                }
+                return {
+                    showDialog: false,
+                    options: defaultOptions,
+                }
+            },
+            created() {
+                // 挂载到原型上
+                Vue.prototype._$dialog = options => new Promise((resolve,reject) => {
+                    this.showEvent(Object.assign({
+                        success(res) {
+                            resolve(res)
+                        }
+                    },options))
+                })
+            },
+            methods: {
+                showEvent(options) {
+                    if (!options.content) {
+                        throw Error('dialog组件content 参数不能为空')
+                        return
+                    }
+                    Object.assign(this.options,options)
+                    this.showDialog = true
+                },
+                cancelEvent() {
+                    this.showDialog = false
+                    typeof this.options.success === 'function' && this.options.success({
+                        cancel: true,
+                    })
+                },
+                confirmEvent() {
+                    this.showDialog = false
+                    typeof this.options.success === 'function' && this.options.success({
+                        confirm: true,
+                    })
+                },
+            },
+        }
+        const app = new Vue({
+            el: '#app',
+            components: {
+                mDialog,
+            },
+            data() {
+                return {
+                    options: {
+                        content: '这是测试测试',
+                        confirmText: '确定',
+                        cancelText: '取消',
+                        hideCancel: false,
+
+                    },
+                    confirmFnText: `setTimeout(() => {\n  alert('123456')\n})`,
+                    cancelFnText: `setTimeout(() => {\n  alert('cancel')\n})`,
+                }
+            },
+            methods: {
+                clickBtn() {
+                    this._$dialog(this.options).then(res => {
+                        if (res.cancel) {
+                            try {
+                                (new Function(this.cancelFnText))()
+                            }
+                            catch (e) {
+                                throw Error('输入的操作有误')
+                            }
+                        }
+                        else if (res.confirm) {
+                            try {
+                                (new Function(this.confirmFnText))()
+                            }
+                            catch (e) {
+                                throw Error('输入的操作有误')
+                            }
+                        }
+                    })
+                },
+            },
+        })
+    </script>
+</body>
+</html>
