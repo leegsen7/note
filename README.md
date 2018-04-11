@@ -4,7 +4,7 @@
 ---
 
 ## 2018
-- [使用Promise和callback封装一个dialog组件](https://leegsen7.github.io/note/src/2018/promise_callback_dialog/index.html)
+- [使用Promise和callback封装一个Vue的dialog组件](https://leegsen7.github.io/note/src/2018/promise_callback_dialog/index.html)
 - [计算斐波那契数列的前n项和](./src/2018/calc_fibonacci_sum/index.md)
 - [学习Vue.js开发一个简易的mvvm库](https://github.com/leegsen7/mVue)
 - [原型和原型链](./src/2018/prototype_and_prototype_chain/index.md)
