@@ -38,7 +38,7 @@ li{
 	    <div id="div2">
 	    	我是div2
 			<div id="div3">
-				我是div3
+				我是div3（点击这里）
 			</div>
 	    </div>
     </div>
@@ -59,8 +59,8 @@ div1.addEventListener('click', function() {　　
 div1.addEventListener('click', function() {　　
     alert('div1冒泡')　　
 }, false);　
-div2.addEventListener('click', function() {　　
-    alert('div2捕获')　　
+div2.addEventListener('click', function(event) {　　
+    alert('div2捕获')
 }, true);　　
 div2.addEventListener('click', function() {　　
     alert('div2冒泡')　　
@@ -69,40 +69,40 @@ div3.addEventListener('click', function() {　　
     alert('div3捕获')　　
 }, true);　　
 div3.addEventListener('click', function(event) {　　
-    alert('div3冒泡');
+    // alert('div3冒泡');
     // 阻止冒泡事件
-    // event.stopPropagation();
+    alert('div3冒泡，阻止了冒泡');
+    event.stopPropagation();
 }, false);
 
 // div1捕获 => div2捕获 => div3捕获 => div3冒泡 => div2冒泡 => div1冒泡
 
-
-// 原始方法
-// window.onload = function(){
-// 	var oUl = document.getElementById("ul");
-// 	var aLi = oUl.getElementsByTagName("li");
-
-// 	for(var i=0; i<aLi.length; i++){
-// 		aLi[i].onmouseover = function(){
-// 			this.style.background = "red";
-// 		}
-// 		aLi[i].onmouseout = function(){
-// 			this.style.background = "";
-// 		}
-// 	}
-// }
-// 委托方法
-window.onload = function(){
-	var oUl = document.getElementById("ul");
-	oUl.addEventListener('click',function(event){
-		var event = event || window.event;
-		var target = event.target || event.srcElement;
-		if (target.nodeName.toLowerCase() == 'li'){
-			var value = target.getAttribute('data');
-			alert(value);
-		}		
-	});
+// 事件委托方法
+var ulEle = document.getElementById("ul");
+var liEleList = ulEle.getElementsByTagName('li')
+let liEleLen = liEleList.length
+ulEle.addEventListener('click',function(event){
+    var event = event || window.event;
+    var target = event.target || event.srcElement;
+    if (target.nodeName.toLowerCase() == 'li'){
+        alert('捕获委托' + target.textContent);
+    }
+}, true);
+for (let i = 0; i < liEleLen; i++) {
+    liEleList[i].addEventListener('click',() => {
+        alert('目标捕获')
+    }, true)
+    liEleList[i].addEventListener('click',() => {
+        alert('目标冒泡')
+    }, false)
 }
+ulEle.addEventListener('click',function(event){
+    var event = event || window.event;
+    var target = event.target || event.srcElement;
+    if (target.nodeName.toLowerCase() == 'li'){
+        alert('冒泡委托' + target.textContent);
+    }
+}, false);
 </script>
 </body>
 </html>
