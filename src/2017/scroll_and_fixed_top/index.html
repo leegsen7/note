@@ -18,7 +18,7 @@
 		text-align: center;
 	}
 	.content{
-		height: 3000px;
+		padding-bottom: 25px;
 		background: yellow;
 	}
 	.content-fix-tab{
@@ -53,48 +53,7 @@
 		<div class="content-fix-tab">
 			fixTab
 		</div>
-		<div class="content-main">
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-			<li>这是li标签</li>
-		</div>
+		<div class="content-main"></div>
 	</div>
 <script>
 var element = document.getElementsByClassName('content-fix-tab')[0];
@@ -102,6 +61,15 @@ var elementHeight = element.offsetHeight;
 var header = document.getElementsByTagName('header')[0];
 var headerHeight = header.offsetHeight;
 var timout = null;
+var contentMainEle = document.getElementsByClassName('content-main')[0]
+var addCount = 100
+var htmlStr = ''
+
+for (let i=1; i<addCount+1; i++) {
+	htmlStr += `<li>第${i}个标签</li>`
+}
+
+contentMainEle.innerHTML = htmlStr
 
 // 判断类是否存在
 Element.prototype.hasClass = function(aClass){
@@ -129,7 +97,8 @@ var isSupportSticky = (function (){
       	o = document.body;
     n.style.cssText = "display:none;" + e,
     o.appendChild(n);
-    var a = /sticky/i.test(window.getComputedStyle(n).position);
+    var position = window.getComputedStyle(n).position
+    var a = /sticky/i.test(position);
     return o.removeChild(n),
     	n = null,
     	a;
