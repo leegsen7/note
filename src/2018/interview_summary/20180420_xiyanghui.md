@@ -1,7 +1,7 @@
 ### 西洋汇
 
-问题1：请用 javascript 实现一个函数 parseUrl(url)，将一段 url 字符串解析为 Object。
-例如：`parseUrl("http://www.xiyanghui.com/product/list?id=123456&sort=discount#title");`
+问题1：请用 javascript 实现一个函数 parseUrl(url)，将一段 url 字符串解析为 Object。<br>
+例如：`parseUrl("http://www.xiyanghui.com/product/list?id=123456&sort=discount#title");`<br>
 返回结果：
 ```javascript
 {
@@ -48,7 +48,7 @@ function parseUrl(url) {
 console.log(parseUrl(url))
 ```
 
-问题2：请用 javascript 实现一个函数 verify(text), 检查字串里面的括号是否有正确嵌套
+问题2：请用 javascript 实现一个函数 verify(text), 检查字串里面的括号是否有正确嵌套<br>
 例如：
 ```javascript
 verify("---(++++)----")                         -> 1
@@ -86,7 +86,7 @@ function verify(text) {
 }
 ```
 
-问题3：用js写一个简单的交通灯功能，10秒绿灯倒数，3秒黄灯倒数，5秒红灯倒数，如何让三个灯不断交替重复？
+问题3：用js写一个简单的交通灯功能，10秒绿灯倒数，3秒黄灯倒数，5秒红灯倒数，如何让三个灯不断交替重复？<br>
 答案如下：
 ```javascript
 const configList = [
