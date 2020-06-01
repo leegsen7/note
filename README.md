@@ -5,6 +5,7 @@
 
 ---
 ## 2020
+- [最长递增子序列](./src/2020/最长递增子序列.md)
 - [凑零钱问题](./src/2020/凑零钱问题.md)
 - [在React中注册使用指令](https://github.com/leegsen7/react-with-directive)
 - [实现new操作符](./src/2020/实现new操作符.md)
