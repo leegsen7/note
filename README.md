@@ -5,6 +5,7 @@
 
 ---
 ## 2020
+- [实现一个自动执行generator的co函数](./src/2020/实现一个自动执行generator的co函数.md)
 - [复原IP地址](./src/2020/复原IP地址.md)
 - [从0开始编写一个A+规范的Promise](./src/2020/promise/README.md)
 - [高楼扔鸡蛋](./src/2020/高楼扔鸡蛋.md)
