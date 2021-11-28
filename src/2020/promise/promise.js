@@ -184,7 +184,7 @@ class MyPromise {
   catch(onRejected) {
     return this.then(undefined, onRejected)
   }
-  // 不管状态如何，都会执行，支持cb返回promise，传递value，并且返回promise的实例
+  // 不管状态如何，都会执行，支持cb返回promise，传递当前的状态和value（注意：不是cb的状态和value），并且返回promise的实例
   finally(cb) {
     if (isFunction(cb)) {
       return this.then(value => {
